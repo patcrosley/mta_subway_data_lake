@@ -1,6 +1,29 @@
 {
 	"name": "pl_bronze_layer_ingestion",
 	"properties": {
+		"activities": [
+			{
+				"name": "Ingest_bronze_entrance_exit",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/bronze_entrance_exit"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"concurrency": 1,
 		"annotations": []
 	}
 }
