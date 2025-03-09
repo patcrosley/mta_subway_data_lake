@@ -85,5 +85,6 @@ ADF ensures **efficient, scalable, and automated** data processing across the en
 - 📂 bronze/ → Raw data ingestion from sources like CSV, JSON, XML
 - 📂 silver/ → Data cleaning, deduplication, transformations, dimensional modelling
 - 📂 gold/ → Aggregated, analytics-ready tables
+- 📂 orchestration → ADF json configuration for the pipeline orchestration
 - 📂 utils/ → Reusable PySpark functions and helper scripts
 - 📂 raw_data/ → a copy of raw data stored in ADLS Gen2
