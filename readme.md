@@ -45,13 +45,13 @@ This project follows the **Medallion Architecture**, structuring data into three
   - **Fact tables** for transactional data
   - **Dimension tables** for descriptive data
   - **Lookup tables** for dictionaries, translating dirty values into clean ones or providing additional metadata
-- Application of **multiple data transformations** to further refine and standardize the data.
+- Application of **multiple data transformations** to further refine and standardise the data.
 - Data stored in Delta **managed tables** within the mta_silver schema, providing full control over the dataset.
 
 ### Gold Layer
 - **Creation of report tables**: Refined datasets are designed to provide the most valuable data for analysis.
 - **Application of several data transformations**, e.g.:
-  - **Aggregations** and **groupby** operations to summarize data.
+  - **Aggregations** and **groupby** operations to summarise data.
   - **Window functions** for calculating additional metrics.
 - **Data stored in Delta managed tables** within the mta_gold schema, ensuring full control and consistency.
 - **Consumption-ready data**, optimized for fast querying and reporting by business users.
