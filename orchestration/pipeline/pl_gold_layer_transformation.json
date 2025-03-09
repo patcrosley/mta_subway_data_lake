@@ -1,0 +1,136 @@
+{
+	"name": "pl_gold_layer_transformation",
+	"properties": {
+		"activities": [
+			{
+				"name": "create_gold_schema",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/gold/create_gold_schema"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_gold_rpt_incidents_by_month_of_year",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_gold_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/gold/gold_rpt_incidents_by_month_of_year"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_gold_rpt_qtr_incidents_by_category",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_gold_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/gold/gold_rpt_qtr_incidents_by_category"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_gold_rpt_wifi_connectivity_by_line",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_gold_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/gold/gold_rpt_wifi_connectivity_by_line"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_gold_rpt_yr_incidents_by_line",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_gold_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/gold/gold_rpt_yr_incidents_by_line"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}

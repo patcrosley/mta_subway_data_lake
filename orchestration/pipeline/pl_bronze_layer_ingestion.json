@@ -1,0 +1,165 @@
+{
+	"name": "pl_bronze_layer_ingestion",
+	"properties": {
+		"activities": [
+			{
+				"name": "Ingest_bronze_entrance_exit",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_bronze_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/bronze_entrance_exit"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_bronze_lkp_station",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_bronze_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/bronze_lkp_station"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_bronze_major_incident",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_bronze_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/bronze_major_incident"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_bronze_station",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_bronze_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/bronze_station"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_bronze_wifi_location",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_bronze_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/bronze_wifi_location"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "create_bronze_schema",
+				"description": "Create mta_bronze schema if not exists",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/bronze/create_bronze_schema"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"concurrency": 1,
+		"annotations": []
+	}
+}
