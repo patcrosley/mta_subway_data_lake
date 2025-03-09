@@ -16,10 +16,11 @@ This project integrates Git version control for managing Databricks notebooks an
 ### Technologies used
 
 - **Azure Databricks** (Cloud-based big data processing)
-- **Azure Data Lake Storage Gen2** (data storage)
+- **Azure Data Lake Storage Gen2** (Data storage)
+- **Azure Data Factory** (Orchestration)
 - **Apache Spark** (Distributed data processing engine)
 - **Python and PySpark** (Python API for Spark)
-- **Spark SQL** (Sparse usage for data lake objects management)
+- **Spark SQL** (Limited usage for data lake objects management)
 - **Delta Lake** (ACID-compliant data lake storage)
 - **Git and Github** (Version control for Databricks notebooks)
 
@@ -54,6 +55,31 @@ This project follows the **Medallion Architecture**, structuring data into three
   - **Window functions** for calculating additional metrics.
 - **Data stored in Delta managed tables** within the mta_gold schema, ensuring full control and consistency.
 - **Consumption-ready data**, optimized for fast querying and reporting by business users.
+
+## Load Strategy
+
+The data loading process follows best practices to ensure efficiency and accuracy across different table types:
+
+**Incremental load** for fact tables:
+
+- New records are appended based on the latest ingestion timestamp or unique keys.
+- Ensures efficient processing without duplicating historical data.
+
+**Truncate-load** for dimension and lookup tables:
+- Old data is completely replaced with a fresh dataset.
+- Guarantees up-to-date reference data, preventing inconsistencies caused by slowly changing dimensions.
+
+## Orchestration
+
+Data workflows are orchestrated using **Azure Data Factory** (ADF) to automate and manage data movement across the Medallion architecture. ADF handles:
+- **Ingestion**: Fetching raw data from ADLS Gen2 into the Bronze layer.
+- **Transformation Execution**: Triggering Databricks notebooks to process data into Silver and Gold layers.
+- **Load Management**:
+  - Incremental loading for fact tables.
+  - Truncate-load for dimension and lookup tables.
+- **Scheduling & Monitoring**: Automating pipeline execution and tracking data flow.
+
+ADF ensures **efficient, scalable, and automated** data processing across the entire pipeline.
 
 ## Project Stucture
 - 📂 bronze/ → Raw data ingestion from sources like CSV, JSON, XML
