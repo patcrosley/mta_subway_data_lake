@@ -1,0 +1,13 @@
+{
+	"name": "ls_mta_subway_data_lake",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-1839940181139484.4.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/d402dab7-7223-414a-ab2c-68293c4cad81/resourceGroups/mta-data-lake-rg/providers/Microsoft.Databricks/workspaces/mta-data-lake-adb",
+			"existingClusterId": "0228-082402-kqxci4la"
+		}
+	}
+}
