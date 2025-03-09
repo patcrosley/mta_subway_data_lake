@@ -67,7 +67,7 @@ The data loading process follows best practices to ensure efficiency and accurac
 
 **Truncate-load** for dimension and lookup tables:
 - Old data is completely replaced with a fresh dataset.
-- Guarantees up-to-date reference data, preventing inconsistencies caused by slowly changing dimensions.
+- Guarantees up-to-date reference data, preventing inconsistencies caused by slowly changing dimensions (although SCD type II is very likely to be implemented in the next version of the project).
 
 ## Orchestration
 
