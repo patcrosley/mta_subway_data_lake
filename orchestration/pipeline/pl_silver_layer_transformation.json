@@ -1,0 +1,333 @@
+{
+	"name": "pl_silver_layer_transformation",
+	"properties": {
+		"activities": [
+			{
+				"name": "create_silver_schema",
+				"description": "Create mta_silver schema if not exists",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/create_silver_schema"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_dim_borough",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_silver_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_dim_borough"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_dim_date",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_silver_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_dim_date"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_dim_entrance_exit",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_silver_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_dim_entrance_exit"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_dim_inc_category",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_silver_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_dim_inc_category"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_dim_line",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_silver_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_dim_line"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_fct_major_incident",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "transform_silver_dim_inc_category",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "transform_silver_dim_line",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_fct_major_incident"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_lkp_station",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "create_silver_schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_lkp_station"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_lkp_wifi_line",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "transform_silver_dim_line",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_lkp_wifi_line"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_dim_station",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "transform_silver_lkp_station",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "transform_silver_dim_borough",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_dim_station"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform_silver_fct_wifi_location",
+				"description": "",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "transform_silver_lkp_station",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "transform_silver_dim_borough",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "transform_silver_dim_station",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.0:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/pmkrzyzaniak@gmail.com/mta_subway_data_lake/silver/silver_fct_wifi_location"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_mta_subway_data_lake",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
