@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project builds a data lake for NYC Subway data using Databricks and a multi-layered architecture (Bronze, Silver, Gold). It leverages multiple data engineering tools to process, clean, and transform raw transit data into meaningful insights.
+This project is an example data lake implementation for NYC Subway data from data.gov using Databricks and a multi-layered medallion architecture. It leverages multiple data engineering tools to process, clean, and transform raw transit data into meaningful insights.
 
 The pipeline follows a medallion architecture:
 
